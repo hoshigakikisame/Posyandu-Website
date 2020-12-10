@@ -1,0 +1,53 @@
+html{
+	position: relative;
+}
+
+body {
+	margin-bottom: 100px;
+}
+
+.jumbotron {
+	height: 650px;
+	background: url('https://dnaberita.com/wp-content/uploads/2020/06/Posyandu.jpg');
+	background-size: cover;
+	color : white;
+}
+
+.layer {
+    background-color: rgba(0, 0, 0, 0.5);
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 102vh;
+    z-index: 0;
+}
+
+.about {
+	height: 400px;
+}
+
+.portofolio {
+	height: 400px;
+	background-color: #333;
+	color: #aaa;
+}
+
+.contact {
+	min-height: 800px;
+}
+
+footer {
+	position: absolute;
+	bottom: 0;
+	width: 100%;
+	height: 75px;
+	background-color: #333;
+	padding-top: 30px;  
+}
+
+footer p {
+	color: #aaa;
+	font-size: 1em;
+
+}

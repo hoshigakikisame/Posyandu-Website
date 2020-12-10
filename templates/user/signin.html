@@ -1,0 +1,60 @@
+{% load static %}
+<!DOCTYPE html>
+<html>
+<head>
+	<meta charset="utf-8">
+	<meta http-equiv="X-UA-Compatible" content="IE=edge">
+	<title></title>
+	<meta name="viewport" content="width=device-width, initial-scale=1.0">
+	<link href="https://fonts.googleapis.com/css2?family=Poppins&display=swap" rel="stylesheet"> 
+	<link rel="stylesheet" href="{% static "css/ebook.css" %}">
+	<link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css" integrity="sha384-JcKb8q3iqJ61gNV9KGb8thSsNjpSL0n8PARn9HuZOnIxN0hoP+VmmDGMN5t9UJ0Z" crossorigin="anonymous">
+	<style>
+	.main{
+		width: 40%;
+		height: auto;
+		margin: 0 auto;
+		margin-top: 5%;
+		padding: 10px;
+		position: relative;
+		border: solid 1px gray;
+	}
+	@media only screen and (max-width: 869px){
+		.main{
+			width: 100%;
+		}
+	}
+
+
+	</style>
+</head>
+<body style="">
+	{% include "navbar.html" %}
+	<div class="container p-4 main rounded-lg shadow-lg">
+		<div class="pt-2 pr-2 pb-2">
+			<h2 align="center"><b>SIGN IN.</b></h2>
+			{# <hr style="border: dashed 2px black"> #}
+		</div>
+		<p align="center" class="message text-danger"><b>{{message}}</b></p>
+		<form method="post">
+			{% csrf_token %}
+			<div class="form-group">
+				<label for="exampleInputEmail1">Username</label>
+				<input type="text" class="form-control rounded-pill" name="username" id="exampleInputEmail1" aria-describedby="emailHelp" required>
+				<small id="emailHelp" class="form-text text-muted">We'll never share your data with anyone else.</small>
+			</div>
+			<div class="form-group">
+				<label for="exampleInputPassword1">Password</label>
+				<input type="password" name="password" class="form-control rounded-pill" id="exampleInputPassword1" required>
+			</div>
+			<br>
+			<div align="center">
+				<button type="submit" class="btn btn-success rounded-pill" style="width: 40%">Sign in</button>
+			</div>
+			<br>
+		</form>
+		<br>
+		<p align="center">Don't have account? <a href="{% url 'auth:signup' %}">Create now</a></p>
+	</div>
+</body>
+</html>

@@ -1,0 +1,104 @@
+{% load static %}
+<!DOCTYPE html>
+<html>
+<head>
+	<meta charset="utf-8">
+	<meta http-equiv="X-UA-Compatible" content="IE=edge">
+	<title>Profile</title>
+	<meta name="viewport" content="width=device-width, initial-scale=1.0">
+	<link href="https://fonts.googleapis.com/css2?family=Poppins&display=swap" rel="stylesheet"> 
+	<link rel="stylesheet" href="{% static "css/ebook.css" %}">
+
+	<link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css" integrity="sha384-JcKb8q3iqJ61gNV9KGb8thSsNjpSL0n8PARn9HuZOnIxN0hoP+VmmDGMN5t9UJ0Z" crossorigin="anonymous">
+	<style>
+	.profile-bar{
+		display:flex;
+		justify-content: space-between;
+		margin-top: 5vh;
+	}
+
+	.menu{
+		margin-left: 5px;
+	}
+	</style>
+</head>
+<body> 
+	<script src="https://code.jquery.com/jquery-3.5.1.slim.min.js" integrity="sha384-DfXdz2htPH0lsSSs5nCTpuj/zy4C+OGpamoFVy38MVBnE+IbbVYUew+OrCXaRkfj" crossorigin="anonymous"></script>
+	<script src="https://cdn.jsdelivr.net/npm/bootstrap@4.5.3/dist/js/bootstrap.bundle.min.js" integrity="sha384-ho+j7jyWK8fNQe+A12Hb8AhRq26LrZ/JpcUGGOn+Y7RsweNrtN/tE3MoK7ZeZDyx" crossorigin="anonymous"></script>
+
+	{% include "navbar.html" %}
+	<div class="jumbotron">
+		<h1 class="display-4">Halo {{request.user}}</h1>
+		<p class="lead">Lihat Biodata dan upload perkembangan anak anda disini</p>
+		<hr class="my-4">
+		<button type="button" class="btn btn-success" data-toggle="modal" data-target="#exampleModal">
+			Biodata Saya
+		</button>
+		{% if hari_ini < perkembangan_terbaru %}
+		<a class="btn btn-success menu disabled" href="#" role="button">Bisa menambahkan progres setelah {{sisa_hari.days}} hari lagi</a>
+		{% else %}
+		<a class="btn btn-success menu" href="{% url 'auth:perkembangan' %}" role="button">Tambah Perkembangan</a>
+		{% endif %}
+
+		<!-- Modal -->
+		<div class="modal fade" id="exampleModal" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
+			<div class="modal-dialog modal-dialog-scrollable">
+				<div class="modal-content">
+					<div class="modal-header">
+						<h5 class="modal-title" id="exampleModalLabel">Biodata</h5>
+						<button type="button" class="close" data-dismiss="modal" aria-label="Close">
+							<span aria-hidden="true">&times;</span>
+						</button>
+					</div>
+					<div class="modal-body">
+						<form method="post">
+							{% csrf_token %}
+							{{form.as_p}}
+					</div>
+					<div class="modal-footer">
+						<input type="submit" class="btn btn-success" value="Save">
+					</div>
+						</form>
+				</div>
+			</div>
+		</div>
+		<br><br>
+		<h3 align="center">Proses perkembangan anak</h3>
+		<br>
+		<table class="table">
+			<thead class="thead-dark">
+				<tr>
+					<th scope="col">NO</th>
+					<th scope="col">Tanggal</th>
+					<th scope="col">Tinggi</th>
+					<th scope="col">Berat</th>
+				</tr>
+			</thead>
+			<tbody>
+				{% for progres in perkembangan %}
+				<tr>
+					<th scope="row">{{forloop.counter}}</th>
+					<td>{{progres.tanggal}}</td>
+					<td>{{progres.tinggi}}</td>
+					<td>{{progres.berat}}</td>
+				</tr>
+				{% endfor %}
+			</tbody>
+		</table>
+	</div>
+
+
+	<script>
+	$('input').addClass("form-control");
+	$('input').addClass("rounded-pill");
+	$('#submit').removeClass("form-control");
+	{% if not request.user.is_authenticated %}
+	$('.download-btn').attr("href", "{% url 'auth:signin' %}");
+	{% endif %}
+	$('.ebook-card').hover(
+		function(){ $(this).addClass('shadow') },
+		function(){ $(this).removeClass('shadow') }
+		);
+	</script>
+</body>
+</html>
