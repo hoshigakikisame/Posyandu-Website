@@ -9,4 +9,4 @@ class PerkembanganForm(forms.ModelForm):
 class BioDataForm(forms.ModelForm):
 	class Meta:
 		model = BioData
-		fields = ['nama_ibu', 'tgl_lahir_ibu', 'gol_darah_ibu', 'telpon', 'alamat', 'nama_anak', 'tgl_lahir_anak', 'gol_darah_anak']
+		fields = ['user', 'nama_ibu', 'tgl_lahir_ibu', 'gol_darah_ibu', 'telpon', 'alamat', 'nama_anak', 'tgl_lahir_anak', 'gol_darah_anak']

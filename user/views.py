@@ -53,7 +53,8 @@ def insert_perkembangan(request):
 	return render(request, 'user/testadd.html', context)
 
 def profile(request):
-	try:
+	if models.BioData.objects.filter(user=request.user).exists():
+		print('ada')
 		context = {}
 		update_biodata = models.BioData.objects.get(user=request.user)
 		data = {
@@ -69,6 +70,7 @@ def profile(request):
 		form = BioDataForm(request.POST or None, initial=data, instance=update_biodata)
 		context['form'] = form
 		if request.method == "POST":
+			
 			form = form.save(commit=False)
 			form.user = User.objects.get(username=request.user)
 			form.save()
@@ -87,15 +89,17 @@ def profile(request):
 
 
 
-	except:
+	else:
+		print('gada')
 		context = {}
 		form = BioDataForm(request.POST or None)
 		context['form'] = form
 		if request.method == "POST":
-			form = form.save(commit=False)
-			form.user = User.objects.get(username=request.user)
-			form.save()
-			return redirect('auth:profile')
+			if form.is_valid():
+				form = form.save(commit=False)
+				form.user = request.user
+				form.save()
+				return redirect('auth:profile')
 		try:
 			perkembangan = models.PerkembanganAnak.objects.filter(user=request.user)
 			perkembangan_terbaru = models.PerkembanganAnak.objects.filter(user=request.user).order_by('-tanggal')[0].tanggal + datetime.timedelta(days=30)
