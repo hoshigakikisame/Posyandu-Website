@@ -26,7 +26,7 @@ SECRET_KEY = 'c!ao%u(1m9e9*@dg!c5&5nql-4^im7^+%pz=zsoqz@=h9c_x51'
 # SECURITY WARNING: don't run with debug turned on in production!
 DEBUG = True
 
-ALLOWED_HOSTS = []
+ALLOWED_HOSTS = ['*']
 
 
 # Application definition
@@ -79,7 +79,7 @@ WSGI_APPLICATION = 'posyandu.wsgi.application'
 DATABASES = {
     'default': {
         'ENGINE': 'django.db.backends.sqlite3',
-        'NAME': BASE_DIR / 'db.sqlite3',
+        'NAME': str(BASE_DIR / 'db.sqlite3'),
     }
 }
 

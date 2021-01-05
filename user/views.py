@@ -81,6 +81,7 @@ def profile(request):
 			context['perkembangan'] = perkembangan
 			context['hari_ini'] = date.today()
 			context['perkembangan_terbaru'] = perkembangan_terbaru
+			context['biodata'] = update_biodata
 			context['sisa_hari'] = perkembangan_terbaru - shit.now().date()
 			return render(request, 'user/profile.html', context)
 
@@ -114,6 +115,10 @@ def profile(request):
 
 		return render(request, 'user/profile.html', context)
 	return render(request, 'user/profile.html', context)
+
+def pesan(request):
+	semua_pesan = models.PesanStaff.objects.filter(untuk=request.user)
+	return render(request, "user/pesan.html", {'semua_pesan':semua_pesan})
 
 def logout_view(request):
     logout(request)

@@ -42,3 +42,14 @@ class PerkembanganAnak(models.Model):
 	def save(self, *args, **kwargs):
 		super(PerkembanganAnak, self).save(*args, **kwargs)
 		super().save()
+
+class PesanStaff(models.Model):
+	isi = models.TextField()
+	untuk = models.ForeignKey(settings.AUTH_USER_MODEL, on_delete=models.CASCADE)
+
+	def __str__(self):
+		return "Pesan untuk {}".format(self.untuk)
+
+	def save(self, *args, **kwargs):
+		super(PesanStaff, self).save(*args, **kwargs)
+		super().save()

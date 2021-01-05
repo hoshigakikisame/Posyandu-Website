@@ -32,7 +32,7 @@
 		<p class="lead">Lihat Biodata dan upload perkembangan anak anda disini</p>
 		<hr class="my-4">
 		<button type="button" class="btn btn-success" data-toggle="modal" data-target="#exampleModal">
-			Biodata Saya
+			Update Biodata
 		</button>
 		{% if hari_ini < perkembangan_terbaru %}
 		<a class="btn btn-success menu disabled" href="#" role="button">Bisa menambahkan progres setelah {{sisa_hari.days}} hari lagi</a>
@@ -54,13 +54,58 @@
 						<form method="post">
 							{% csrf_token %}
 							{{form.as_p}}
-					</div>
-					<div class="modal-footer">
-						<input type="submit" class="btn btn-success" value="Save">
-					</div>
-						</form>
+						</div>
+						<div class="modal-footer">
+							<input type="submit" class="btn btn-success" value="Save">
+						</div>
+					</form>
 				</div>
 			</div>
+		</div>
+		<br><br>
+		<div align="center">
+			<h1>Biodata anda</h1>
+		<table class="table table-bordered" style="max-width: 700px">
+			<thead class="thead-dark">
+				<tr>
+					<th scope="col" colspan="2">data lengkap</th>
+				</tr>
+			</thead>
+			<tbody>
+				<tr>
+					<th scope="row">Nama Ibu</th>
+					<td>{{biodata.nama_ibu}}</td>
+				</tr>
+				<tr>
+					<th scope="row">Tgl lahir ibu</th>
+					<td>{{biodata.tgl_lahir_ibu}}</td>
+				</tr>
+				<tr>
+					<th scope="row">Golongan darah ibu</th>
+					<td>{{biodata.gol_darah_ibu}}</td>
+				</tr>
+				<tr>
+					<th scope="row">Telepon</th>
+					<td>{{biodata.telpon}}</td>
+				</tr>
+				<tr>
+					<th scope="row">Alamat</th>
+					<td>{{biodata.alamat}}</td>
+				</tr>
+				<tr>
+					<th scope="row">Nama anak</th>
+					<td>{{biodata.nama_anak}}</td>
+				</tr>
+				<tr>
+					<th scope="row">Tgl lahir anak</th>
+					<td>{{biodata.tgl_lahir_anak}}</td>
+				</tr>
+				<tr>
+					<th scope="row">Golongan darah anak</th>
+					<td>{{biodata.gol_darah_anak}}</td>
+				</tr>
+			</tbody>
+		</table>
 		</div>
 		<br><br>
 		<h3 align="center">Proses perkembangan anak</h3>
